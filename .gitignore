@@ -10,8 +10,9 @@
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
 
-# Visual Studio / Rider
+# Visual Studio / Rider / VSCode
 .vs/
+.vscode/
 .idea/
 *.csproj
 *.unityproj

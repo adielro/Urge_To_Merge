@@ -1,16 +1,39 @@
 # Urge To Merge
 
+![Urge To Merge Banner](docs/images/urge_to_merge_banner.png)
+
 A Unity 2D merge puzzle game featuring strategic number combination mechanics with mystery effects and bonus systems.
 
-![Game Screenshot](docs/images/gameplay.png)
-*[Add gameplay screenshot showing the board with tiles]*
+[![Play on itch.io](https://img.shields.io/badge/itch.io-Play%20Now-FA5C5C?style=for-the-badge&logo=itch.io&logoColor=white)](https://adielrozenfeld.itch.io/urge-to-merge)
+
+![Gameplay Demo](docs/images/gameplay_gif.gif)
 
 ## 🎮 Game Overview
 
-Urge To Merge is a merge puzzle game where players combine numbered tiles using different mathematical operations. The game features a dynamic board system, mystery effects, fortune wheel bonuses, and various tile status effects that add strategic depth to the gameplay.
+Urge To Merge is a merge puzzle game where players combine numbered tiles using different mathematical operations to reach target goals.
 
-![Main Menu](docs/images/main-menu.png)
-*[Add main menu screenshot]*
+### How to Play
+
+**Objective**: Merge tiles strategically to create specific target numbers and complete goals. Each time you reach a goal, a new, harder target is set for continuous progression.
+
+**Gameplay Mechanics**:
+- **Merge Tiles**: Drag and drop numbered tiles onto each other to combine them
+- **Mathematical Operations**: Choose between addition or subtraction merge strategies
+- **Progressive Goals**: Reach target numbers to complete goals - difficulty increases with each success
+- **Energy Management**: Actions consume energy that regenerates over time
+- **Mystery Tiles**: Special tiles appear that trigger random effects when activated
+- **Status Effects**: Tiles can become frozen (locked), burning (countdown to deletion), or carry other effects
+
+**Strategic Elements**:
+- Plan your merges carefully - order matters in subtraction
+- Use mystery tiles tactically to change the board state
+- Manage energy efficiently for optimal moves
+- Work around frozen or burning tiles
+- Activate bonus power-ups at the right moment
+
+The game features a dynamic board system, fortune wheel bonuses, and various tile status effects that add strategic depth to the gameplay.
+
+![Fortune Wheel](docs/images/fortune-wheel.gif)
 
 ## ✨ Key Features
 
@@ -30,8 +53,7 @@ Urge To Merge is a merge puzzle game where players combine numbered tiles using 
 - **Save System**: Complete progress persistence using JSON + PlayerPrefs
 - **Sound Manager**: Comprehensive audio system for effects and music
 
-![Mystery Effects](docs/images/mystery-effects.png)
-*[Add screenshot showing mystery tile or effect in action]*
+![Mystery Effects](docs/images/mystery.gif)
 
 ## 🏗️ Architecture
 
@@ -60,9 +82,6 @@ Urge To Merge is a merge puzzle game where players combine numbered tiles using 
 - `IMysteryEffect`: Interface for all 7 mystery tile effects
 - Type-safe effect identification using `MysteryEffectType` enum
 
-![Board System](docs/images/board-view.png)
-*[Add screenshot showing the board grid with number slots]*
-
 #### Tile Architecture
 Component-based design:
 - `NumberTile`: Core tile data and logic
@@ -74,13 +93,9 @@ Component-based design:
 
 #### Systems
 - **Energy**: `EnergySystem` for action resource management
-- **Fortune Wheel**: Spin mechanics with `RewardData` assets
 - **Bonus**: `BonusSystem` for power-up inventory and activation
 - **Save**: `SaveSystem` with comprehensive state persistence
 - **Sound**: `SoundManager` for audio playback
-
-![Fortune Wheel](docs/images/fortune-wheel.png)
-*[Add screenshot of the fortune wheel interface]*
 
 ## 📁 Project Structure
 

@@ -9,6 +9,8 @@ public class EnergySystem : SingletonInstance<EnergySystem>
 
     private int currentEnergy;
     private float regenTimer;
+    private float uiUpdateTimer;
+    private const float UI_UPDATE_INTERVAL = 1f; // Update UI every second
 
     public int CurrentEnergy => currentEnergy;
     public int MaxEnergy => maxEnergy;
@@ -80,15 +82,24 @@ public class EnergySystem : SingletonInstance<EnergySystem>
         // Simple in-session regen (offline regen can be added later)
         if (currentEnergy >= maxEnergy)
         {
-            UIManager.Instance?.UpdateEnergyTimer(0);
+            if (uiUpdateTimer != UI_UPDATE_INTERVAL)
+            {
+                UIManager.Instance?.UpdateEnergyTimer(0);
+                uiUpdateTimer = UI_UPDATE_INTERVAL; // Prevent further updates until timer resets
+            }
             return;
         }
 
         regenTimer += Time.deltaTime;
+        uiUpdateTimer += Time.deltaTime;
         
-        // Update timer UI
-        float timeRemaining = regenIntervalSeconds - regenTimer;
-        UIManager.Instance?.UpdateEnergyTimer(timeRemaining);
+        // Update timer UI only once per second
+        if (uiUpdateTimer >= UI_UPDATE_INTERVAL)
+        {
+            float timeRemaining = regenIntervalSeconds - regenTimer;
+            UIManager.Instance?.UpdateEnergyTimer(timeRemaining);
+            uiUpdateTimer = 0;
+        }
         
         if (regenTimer >= regenIntervalSeconds)
         {
@@ -119,10 +130,13 @@ public class EnergySystem : SingletonInstance<EnergySystem>
         // Only clamp to prevent negative energy
         if (currentEnergy < 0) currentEnergy = 0;
         
+        // Don't clamp to max - allow over-max energy (e.g., from rewards)
+        
         // Reset timer if we reached max energy from below max
         if (previousEnergy < maxEnergy && currentEnergy >= maxEnergy)
         {
             regenTimer = 0;
+            uiUpdateTimer = 0; // Reset UI timer to update immediately
         }
         
         UIManager.Instance?.UpdateEnergy(currentEnergy, maxEnergy);

@@ -13,10 +13,13 @@ public class UIManager : SingletonInstance<UIManager>
     [SerializeField] private Color plusColor;
     [SerializeField] private Color minusColor;
 
+    private const string ENERGY_TIMER_FULL = "Next in --:--";
+
     protected override void Awake()
     {
         base.Awake();
         GameEvents.OnGoalNumberReached += GoalReachedHandler;
+        Application.targetFrameRate = 60;
     }
     
     /// <summary>
@@ -46,13 +49,21 @@ public class UIManager : SingletonInstance<UIManager>
     {
         if (secondsRemaining <= 0)
         {
-            energyTimerText.text = "Next in --:--";
+            if (energyTimerText.text != ENERGY_TIMER_FULL)
+            {
+                energyTimerText.text = ENERGY_TIMER_FULL;
+            }
             return;
         }
         
         int minutes = Mathf.FloorToInt(secondsRemaining / 60);
         int seconds = Mathf.FloorToInt(secondsRemaining % 60);
-        energyTimerText.text = $"Next in {minutes:00}:{seconds:00}";
+        string newText = $"Next in {minutes:00}:{seconds:00}";
+        
+        if (energyTimerText.text != newText)
+        {
+            energyTimerText.text = newText;
+        }
     }
 
     private void OnDestroy()
