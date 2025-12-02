@@ -61,7 +61,6 @@ The game features a dynamic board system, fortune wheel bonuses, and various til
 
 - **Singleton Pattern**: Consistent `SingletonInstance<T>` base class for all managers
 - **Strategy Pattern**: Pluggable merge strategies (Addition, Subtraction)
-- **Component Pattern**: Tile behavior split into focused components
 - **Observer Pattern**: Event-driven communication via `GameEvents`
 - **Object Pool**: Efficient tile instance management
 
